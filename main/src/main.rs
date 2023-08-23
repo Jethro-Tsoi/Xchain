@@ -28,6 +28,7 @@ fn main() {
 
     loop {
         println!("Please enter a transaction: (e.g. a -> b, 10 eHKD -> 1 eGBP)");
+        println!("Type 'exit' to end");
 
         let mut input = String::new();
         io::stdin()
