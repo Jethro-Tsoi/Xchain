@@ -1,5 +1,6 @@
 // pub type Address = [u8; 24];
 
+#[derive(Debug)]
 pub struct Account{
     address: String,
     balance: [f32; 256],

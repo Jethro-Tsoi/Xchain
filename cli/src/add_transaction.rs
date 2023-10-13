@@ -7,16 +7,14 @@ use std::sync::{
     Arc
 };    
 use core::currency::CurrencyList;
+use crate::get_input::GetInput;
 
 
-pub fn input(bc: Arc<Mutex<blockchain::BlockChain>>){
+pub fn add_transaction(bc: Arc<Mutex<blockchain::BlockChain>>, account_map: &mut HashMap<String, Account>){
 
-    let mut account_map: HashMap<&str, Account> = HashMap::new();
-
-    account_map.insert("test1", Account::new(String::from("test1")));
-    account_map.insert("test2", Account::new(String::from("test2")));
     loop {
         println!("Please enter a transaction: (e.g. a -> b, 10 eHKD -> 1 eGBP)");
+        println!("Type 'menu' back to menu");
         println!("Type 'exit' to end");
 
         println!("Enter transferer: (e.g. a)");
@@ -102,15 +100,4 @@ pub fn input(bc: Arc<Mutex<blockchain::BlockChain>>){
 
         
     }
-}
-
-fn get_input_line () -> String {
-    let mut input = String::new();
-    if input == "exit" {
-        process::exit(1);
-    }
-    io::stdin()
-        .read_line(&mut input)
-        .expect("Failed to read line");
-    input.trim().to_string()
 }

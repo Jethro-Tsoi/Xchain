@@ -1,5 +1,3 @@
-// pub use output_thread;
-
 use core::blockchain;
 use std::{ 
     thread,
@@ -10,8 +8,8 @@ use std::{
     },
 };    
 
-pub fn output_thread(bc: Arc<Mutex<blockchain::BlockChain>>) {
-    thread::spawn(move || {
+pub fn print(bc: Arc<Mutex<blockchain::BlockChain>>){
+    thread::spawn(move ||{
         loop {
             let bc = bc.lock().unwrap();
             println!("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
@@ -23,6 +21,10 @@ pub fn output_thread(bc: Arc<Mutex<blockchain::BlockChain>>) {
 
             }
             drop(bc);
+
+            // todo : cal menu
+            // return ;
+
             thread::sleep(Duration::from_secs(5));
         }
     });

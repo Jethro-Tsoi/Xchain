@@ -1,34 +1,21 @@
-use core::{
-    blockchain, 
-    account::{
-        self, 
-        Account
-    }
-};
-use main::{
-    output_thread,
-    input_thread,
-};
+use core::{blockchain, account::Account};
 use std::{ 
-    io,
-    thread,
-    time::Duration, 
-    sync::{
-        Mutex, 
-        Arc
-    }, 
+    sync::{Arc, Mutex}, 
     collections::HashMap,
-};    
+};   
+use cli::menu::Menu; 
 
 fn main() {
 
     let bc = blockchain::BlockChain::new_blockchain();
     let bc = Arc::new(Mutex::new(bc));
-    
-    let bc_for_output = Arc::clone(&bc);
-    output_thread::output_thread(bc_for_output);
 
-    input_thread::input(bc);
+    let mut account_map: HashMap<String, Account> = HashMap::new();
+
+    let menu = Menu::new(bc, account_map);
+    menu.execute();
+    
+    
 }
 
 
